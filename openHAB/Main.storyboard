@@ -49,8 +49,42 @@
                                         </accessibility>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GenericUITableViewCell" id="fYY-WZ-Zms" customClass="GenericUITableViewCell" customModule="openHAB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextInputUITableViewCell" id="7ql-eP-dwj" userLabel="TextInputUITableViewCell" customClass="TextInputUITableViewCell" customModule="openHAB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="85" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ql-eP-dwj" id="djo-VL-ZpJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="348.66666666666669" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Input from the user which can get very long" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhF-CW-Anz">
+                                                    <rect key="frame" x="247.99999999999997" y="11.999999999999998" width="95.666666666666657" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Temp blabla ballall llalla" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4l-PV-8or">
+                                                    <rect key="frame" x="62" y="11.999999999999998" width="178" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="D4l-PV-8or" firstAttribute="width" relation="greaterThanOrEqual" secondItem="djo-VL-ZpJ" secondAttribute="width" multiplier="0.1" priority="999" placeholder="YES" id="7WF-4Z-quI"/>
+                                                <constraint firstItem="OhF-CW-Anz" firstAttribute="centerY" secondItem="djo-VL-ZpJ" secondAttribute="centerY" id="9Lv-Q7-Jqy"/>
+                                                <constraint firstItem="OhF-CW-Anz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D4l-PV-8or" secondAttribute="trailing" constant="8" id="Uxn-Cp-qdN"/>
+                                                <constraint firstAttribute="trailing" secondItem="OhF-CW-Anz" secondAttribute="trailing" constant="5" id="eq4-X2-Qod"/>
+                                                <constraint firstItem="D4l-PV-8or" firstAttribute="leading" secondItem="djo-VL-ZpJ" secondAttribute="leading" constant="62" id="njs-eh-IlV"/>
+                                                <constraint firstItem="D4l-PV-8or" firstAttribute="centerY" secondItem="djo-VL-ZpJ" secondAttribute="centerY" id="yKA-5a-xb7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="customDetailTextLabel" destination="OhF-CW-Anz" id="Elc-Eb-89i"/>
+                                            <outlet property="customDetailTextLabelConstraint" destination="eq4-X2-Qod" id="ZfJ-av-g5h"/>
+                                            <outlet property="customTextLabel" destination="D4l-PV-8or" id="TRq-8q-CQz"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GenericUITableViewCell" id="fYY-WZ-Zms" customClass="GenericUITableViewCell" customModule="openHAB">
+                                        <rect key="frame" x="0.0" y="129" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fYY-WZ-Zms" id="GBq-BC-eoa">
                                             <rect key="frame" x="0.0" y="0.0" width="348.66666666666669" height="44"/>
