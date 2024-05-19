@@ -33,6 +33,7 @@ enum WidgetTypeEnum {
     case video
     case webview
     case mapview
+    case input
 
     var boolState: Bool {
         guard case let .switcher(value) = self else { return false }
@@ -162,6 +163,8 @@ class ObservableOpenHABWidget: NSObject, MKAnnotation, Identifiable, ObservableO
             .webview
         case "Mapview":
             .mapview
+        case "Input":
+            .input
         default:
             .unassigned
         }
