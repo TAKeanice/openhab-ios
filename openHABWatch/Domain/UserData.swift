@@ -41,7 +41,7 @@ final class UserData: ObservableObject {
     private var currentPageOperation: Alamofire.Request?
     private var cancellables = Set<AnyCancellable>()
 
-    private let logger = Logger(subsystem: "org.openhab.app.watch", category: "UserData")
+    private let logger = Logger(subsystem: "org.openhab.app.watchkitapp", category: "UserData")
 
     // Demo
     init() {

@@ -19,7 +19,7 @@ import WatchKit
 class AppMessageService: NSObject, WCSessionDelegate {
     static let singleton = AppMessageService()
 
-    private let logger = Logger(subsystem: "org.openhab.app.watch", category: "AppMessageService")
+    private let logger = Logger(subsystem: "org.openhab.app.watchkitapp", category: "AppMessageService")
 
     func updateValuesFromApplicationContext(_ applicationContext: [String: AnyObject]) {
         if NetworkConnection.shared == nil {
