@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [Version 3.0.6, Build 24] - 2024-10-30Z
+
 - Update SVGKit to fix crash on new iPhone models (#838)
 - Correct the bundle identifiers for test targets
 
