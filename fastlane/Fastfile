@@ -176,10 +176,10 @@ platform :ios do
             groups: ['Beta Testers']
         )
 
-	upload_symbols_to_crashlytics(
-		gsp_path: "openHAB/GoogleService-Info.plist",
-		binary_path: './scripts/upload-symbols'
-	)
+        upload_symbols_to_crashlytics(
+            gsp_path: "openHAB/GoogleService-Info.plist",
+            binary_path: './scripts/upload-symbols'
+        )
 
         clean_build_artifacts
 
@@ -187,7 +187,8 @@ platform :ios do
         commit_version_bump(
             message: "committed version bump: #{version} (#{build_number})",
             xcodeproj: 'openHAB.xcodeproj',
-            include: %w[CHANGELOG.md]
+            include: %w[CHANGELOG.md],
+            force: true
         )
         if is_ci?
             sh 'git commit --amend --no-edit --signoff --author="openhab-bot <info@openhabfoundation.org>"'
