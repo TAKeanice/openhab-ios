@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [Version 3.0.7, Build 29] - 2024-10-31Z
 - Integration of new watch app
 - Handling of SVG files on watch app
 
