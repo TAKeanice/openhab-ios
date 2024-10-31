@@ -26,13 +26,14 @@ struct OpenHABWatch: App {
             TabView {
                 ContentView(viewModel: userData)
                     .tabItem {
-                        Label("Received", systemImage: "tray.and.arrow.down.fill")
+                        Label("Sitemap", systemSymbol: .circleFill)
                     }
                 PreferencesSwiftUIView()
                     .tabItem {
-                        Label("Preferences", systemImage: "person.crop.circle.fill")
+                        Label("Preferences", systemSymbol: .circleFill)
                     }
             }
+            .tabViewStyle(.page)
             .environmentObject(settings)
             .task {
                 let center = UNUserNotificationCenter.current()
