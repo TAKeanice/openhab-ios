@@ -213,7 +213,7 @@ public class OpenHABWidget: NSObject, MKAnnotation, Identifiable {
 
 extension OpenHABWidget {
     // This is an ugly initializer
-    convenience init(widgetId: String, label: String, icon: String, type: WidgetType, url: String?, period: String?, minValue: Double?, maxValue: Double?, step: Double?, refresh: Int?, height: Double?, isLeaf: Bool?, iconColor: String?, labelColor: String?, valueColor: String?, service: String?, state: String?, text: String?, legend: Bool?, inputHint: InputHint, encoding: String?, item: OpenHABItem?, linkedPage: OpenHABSitemapPage?, mappings: [OpenHABWidgetMapping], widgets: [OpenHABWidget], visibility: Bool?, switchSupport: Bool?, forceAsItem: Bool?) {
+    convenience init(widgetId: String, label: String, icon: String, type: WidgetType, url: String?, period: String?, minValue: Double?, maxValue: Double?, step: Double?, refresh: Int?, height: Double?, isLeaf: Bool?, iconColor: String?, labelColor: String?, valueColor: String?, service: String?, state: String?, text: String?, legend: Bool?, inputHint: InputHint?, encoding: String?, item: OpenHABItem?, linkedPage: OpenHABSitemapPage?, mappings: [OpenHABWidgetMapping], widgets: [OpenHABWidget], visibility: Bool?, switchSupport: Bool?, forceAsItem: Bool?) {
         self.init()
         id = widgetId
         self.widgetId = widgetId
@@ -240,7 +240,7 @@ extension OpenHABWidget {
         self.state = state ?? ""
         self.text = text ?? ""
         self.legend = legend
-        self.inputHint = inputHint
+        self.inputHint = inputHint ?? .text
         self.encoding = encoding ?? ""
         self.item = item
         self.linkedPage = linkedPage
@@ -278,7 +278,7 @@ public extension OpenHABWidget {
         let state: String?
         let text: String?
         let legend: Bool?
-        let inputHint: InputHint
+        let inputHint: InputHint?
         let encoding: String?
         let groupType: String?
         let item: OpenHABItem.CodingData?
