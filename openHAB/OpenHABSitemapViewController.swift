@@ -843,7 +843,8 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
                     textField.delegate = self
                     textField.keyboardType = .numbersAndPunctuation
                 }
-                textExtractor = { alert.textFields?[0].text }
+                //replace expected decimal separator
+                textExtractor = { alert.textFields?[0].text?.replacingOccurrences(of: NSLocale.current.decimalSeparator ?? "", with: ".") }
             case .text:
                 alert.addTextField { textField in
                     textField.clearButtonMode = .always
@@ -852,7 +853,7 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
                 textExtractor = { alert.textFields?[0].text }
             }
             let sendAction = UIAlertAction(title: "Set value", style: .destructive, handler: { [weak self] _ in
-                self?.sendCommand(widget.item, commandToSend: textExtractor()) // TODO: sanitize / convert text?
+                self?.sendCommand(widget.item, commandToSend: textExtractor())
             })
             alert.addAction(sendAction)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -888,8 +889,7 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let decimalSeparator = NSLocale.current.decimalSeparator ?? ""
         let oldString = (textField.text ?? "")
-        let replacement: NSString = string as NSString
-        let wholeNumberRegex = "^-?[0-9]*$"
+        let wholeNumberRegex = /^-?[0-9]*$/
 
         // check for deletion
         return string.isEmpty
@@ -904,15 +904,19 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
             ) // new string replaces negative sign in old string
             // check for old negative sign
             && (
-                !oldString.starts(with: "-") // old string does not start with negative sign
+                oldString.isEmpty
+                    || !oldString.starts(with: "-") // old string does not start with negative sign
                     || range.location > 0 // new string starts after negative sign in old string
                     || range.length > 0
             ) // new string replaces negative sign in old string
-            // check for decimal points
+            // check for decimal signs
             && (
-                string.range(of: wholeNumberRegex) != nil // new string is whole number
-                    || replacement.replacingCharacters(in: replacement.range(of: decimalSeparator), with: "").range(of: wholeNumberRegex) != nil // new string is valid decimal number
-                    && !(oldString as NSString).replacingCharacters(in: range, with: "").contains(decimalSeparator)
+                string.firstRange(of: wholeNumberRegex) != nil // new string is whole number
+                    || (
+                        string.replacing(decimalSeparator, with: "", maxReplacements: 1)
+                            .firstRange(of: wholeNumberRegex) != nil // new string is valid decimal number
+                            && !(oldString as NSString).replacingCharacters(in: range, with: "").contains(decimalSeparator)
+                    )
             ) // old string without replaced range not yet contains decimal separator
     }
 }
