@@ -843,7 +843,7 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
                     textField.delegate = self
                     textField.keyboardType = .numbersAndPunctuation
                 }
-                //replace expected decimal separator
+                // replace expected decimal separator
                 textExtractor = { alert.textFields?[0].text?.replacingOccurrences(of: NSLocale.current.decimalSeparator ?? "", with: ".") }
             case .text:
                 alert.addTextField { textField in
