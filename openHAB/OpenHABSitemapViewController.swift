@@ -698,7 +698,13 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
         case .mapview:
             cell = tableView.dequeueReusableCell(for: indexPath) as MapViewTableViewCell
         case .input:
-            cell = tableView.dequeueReusableCell(for: indexPath) as TextInputUITableViewCell
+            if [.date, .time, .datetime].contains(widget.inputHint) {
+                let pickerCell = tableView.dequeueReusableCell(for: indexPath) as DatePickerUITableViewCell
+                pickerCell.controller = self
+                cell = pickerCell
+            } else {
+                cell = tableView.dequeueReusableCell(for: indexPath) as TextInputUITableViewCell
+            }
         case .group, .text, .defaultWidget, .unknown:
             cell = tableView.dequeueReusableCell(for: indexPath) as GenericUITableViewCell
         }
@@ -804,56 +810,44 @@ extension OpenHABSitemapViewController: UITableViewDelegate, UITableViewDataSour
             navigationController?.pushViewController(hostingController, animated: true)
         } else if widget.type == .input {
             let hint = widget.inputHint
+            let textExtractor: ((UIAlertController) -> String?)?
+            let textFieldAdder: ((UITextField) -> Void)?
+
+            switch hint {
+            case .date, .time, .datetime:
+                // value setting is handeled by the cell itself
+                textExtractor = nil
+                textFieldAdder = nil
+            case .number:
+                textFieldAdder = { textField in
+                    textField.text = widget.state
+                    textField.clearButtonMode = .always
+                    textField.delegate = self
+                    textField.keyboardType = .numbersAndPunctuation
+                }
+                // replace expected decimal separator
+                textExtractor = { $0.textFields?[0].text?.replacingOccurrences(of: NSLocale.current.decimalSeparator ?? "", with: ".") }
+            case .text:
+                textFieldAdder = { textField in
+                    textField.text = widget.state
+                    textField.clearButtonMode = .always
+                    textField.keyboardType = .default
+                }
+                textExtractor = { $0.textFields?[0].text }
+            }
+            guard let textExtractor, let textFieldAdder else {
+                return
+            }
+
             // TODO: proper texts instead of hardcoded values
             let alert = UIAlertController(
                 title: "Enter new value",
                 message: "Current value for \(widget.label) is \(widget.state)",
                 preferredStyle: .alert
             )
-
-            let textExtractor: () -> String?
-            switch hint {
-            case .date:
-                let datePicker = UIDatePicker()
-                datePicker.datePickerMode = .date
-                alert.view.addSubview(datePicker)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .full
-                dateFormatter.timeStyle = .none
-                textExtractor = { dateFormatter.string(from: datePicker.date) }
-            case .datetime:
-                let datePicker = UIDatePicker()
-                datePicker.datePickerMode = .dateAndTime
-                alert.view.addSubview(datePicker)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .full
-                dateFormatter.timeStyle = .full
-                textExtractor = { dateFormatter.string(from: datePicker.date) }
-            case .time:
-                let datePicker = UIDatePicker()
-                datePicker.datePickerMode = .time
-                alert.view.addSubview(datePicker)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .none
-                dateFormatter.timeStyle = .full
-                textExtractor = { dateFormatter.string(from: datePicker.date) }
-            case .number:
-                alert.addTextField { textField in
-                    textField.clearButtonMode = .always
-                    textField.delegate = self
-                    textField.keyboardType = .numbersAndPunctuation
-                }
-                // replace expected decimal separator
-                textExtractor = { alert.textFields?[0].text?.replacingOccurrences(of: NSLocale.current.decimalSeparator ?? "", with: ".") }
-            case .text:
-                alert.addTextField { textField in
-                    textField.clearButtonMode = .always
-                    textField.keyboardType = .default
-                }
-                textExtractor = { alert.textFields?[0].text }
-            }
+            alert.addTextField(configurationHandler: textFieldAdder)
             let sendAction = UIAlertAction(title: "Set value", style: .destructive, handler: { [weak self] _ in
-                self?.sendCommand(widget.item, commandToSend: textExtractor())
+                self?.sendCommand(widget.item, commandToSend: textExtractor(alert))
             })
             alert.addAction(sendAction)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))

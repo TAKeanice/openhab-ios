@@ -49,8 +49,37 @@
                                         </accessibility>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextInputUITableViewCell" id="7ql-eP-dwj" userLabel="TextInputUITableViewCell" customClass="TextInputUITableViewCell" customModule="openHAB" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DatePickerUITableViewCell" id="3hT-nD-bR5" customClass="DatePickerUITableViewCell" customModule="openHAB" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="85" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3hT-nD-bR5" id="6YV-6e-W01">
+                                            <rect key="frame" x="0.0" y="0.0" width="348.66666666666669" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="780" text="Temp blabla ballall llalla" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sF-SD-siy">
+                                                    <rect key="frame" x="61.999999999999986" y="12" width="172.66666666666663" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <datePicker contentMode="scaleToFill" horizontalHuggingPriority="800" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="z76-h7-KYr">
+                                                    <rect key="frame" x="242.66666666666663" y="4" width="98" height="36"/>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2sF-SD-siy" firstAttribute="centerY" secondItem="6YV-6e-W01" secondAttribute="centerY" id="IBS-3s-ubY"/>
+                                                <constraint firstAttribute="trailing" secondItem="z76-h7-KYr" secondAttribute="trailing" constant="8" id="NfO-Ga-1yL"/>
+                                                <constraint firstItem="2sF-SD-siy" firstAttribute="leading" secondItem="6YV-6e-W01" secondAttribute="leading" constant="62" id="UGb-4M-K26"/>
+                                                <constraint firstItem="z76-h7-KYr" firstAttribute="leading" secondItem="2sF-SD-siy" secondAttribute="trailing" constant="8" symbolic="YES" id="UH0-6J-KUC"/>
+                                                <constraint firstItem="z76-h7-KYr" firstAttribute="centerY" secondItem="6YV-6e-W01" secondAttribute="centerY" id="hmX-72-IFM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="customTextLabel" destination="2sF-SD-siy" id="GjT-Fl-gux"/>
+                                            <outlet property="datePicker" destination="z76-h7-KYr" id="AgZ-MY-7HG"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextInputUITableViewCell" id="7ql-eP-dwj" userLabel="TextInputUITableViewCell" customClass="TextInputUITableViewCell" customModule="openHAB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="129" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ql-eP-dwj" id="djo-VL-ZpJ">
                                             <rect key="frame" x="0.0" y="0.0" width="348.66666666666669" height="44"/>
@@ -69,7 +98,6 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="D4l-PV-8or" firstAttribute="width" relation="greaterThanOrEqual" secondItem="djo-VL-ZpJ" secondAttribute="width" multiplier="0.1" priority="999" placeholder="YES" id="7WF-4Z-quI"/>
                                                 <constraint firstItem="OhF-CW-Anz" firstAttribute="centerY" secondItem="djo-VL-ZpJ" secondAttribute="centerY" id="9Lv-Q7-Jqy"/>
                                                 <constraint firstItem="OhF-CW-Anz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="D4l-PV-8or" secondAttribute="trailing" constant="8" id="Uxn-Cp-qdN"/>
                                                 <constraint firstAttribute="trailing" secondItem="OhF-CW-Anz" secondAttribute="trailing" constant="5" id="eq4-X2-Qod"/>
