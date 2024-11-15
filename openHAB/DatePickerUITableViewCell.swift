@@ -35,11 +35,11 @@ class DatePickerUITableViewCell: GenericUITableViewCell {
             default:
                 fatalError("Must not use this cell for input other than date and time")
             }
-            guard let date = widget.labelValue else {
+            guard let date = widget.item?.state else {
                 datePicker.date = Date()
                 return
             }
-            datePicker.date = Self.dateFormatter.date(from: date) ?? Date.now
+            datePicker.date = DateFormatter.iso8601Full.date(from: date) ?? Date.now
         }
     }
 
@@ -49,7 +49,7 @@ class DatePickerUITableViewCell: GenericUITableViewCell {
         didSet {
             datePicker.addAction(UIAction { [weak self] _ in
                 guard let self else { return }
-                controller?.sendCommand(widget.item, commandToSend: datePicker.date.ISO8601Format())
+                controller?.sendCommand(widget.item, commandToSend: DateFormatter.iso8601Full.string(from: datePicker.date))
             }, for: .valueChanged)
         }
     }
