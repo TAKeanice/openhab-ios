@@ -13,6 +13,12 @@ import OpenHABCore
 import UIKit
 
 class DatePickerUITableViewCell: GenericUITableViewCell {
+    static let dateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter
+    }()
+
     override var widget: OpenHABWidget! {
         get {
             super.widget
@@ -29,7 +35,11 @@ class DatePickerUITableViewCell: GenericUITableViewCell {
             default:
                 fatalError("Must not use this cell for input other than date and time")
             }
-            datePicker.date = ISO8601DateFormatter().date(from: widget.state) ?? Date.now
+            guard let date = widget.labelValue else {
+                datePicker.date = Date()
+                return
+            }
+            datePicker.date = Self.dateFormatter.date(from: date) ?? Date.now
         }
     }
 

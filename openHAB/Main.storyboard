@@ -74,6 +74,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="customDetailTextLabelConstraint" destination="NfO-Ga-1yL" id="qaa-nK-0KP"/>
                                             <outlet property="customTextLabel" destination="2sF-SD-siy" id="GjT-Fl-gux"/>
                                             <outlet property="datePicker" destination="z76-h7-KYr" id="AgZ-MY-7HG"/>
                                         </connections>
