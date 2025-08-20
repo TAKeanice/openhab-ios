@@ -16,7 +16,7 @@ import SFSafeSymbols
 import SwiftUI
 
 extension OpenHABWidget {
-    @ViewBuilder func makeView(settings: AppSettings) -> some View {
+    @MainActor @ViewBuilder func makeView(settings: AppSettings) -> some View {
         if linkedPage != nil {
             NavigationLink(destination:
                 LazyView(
